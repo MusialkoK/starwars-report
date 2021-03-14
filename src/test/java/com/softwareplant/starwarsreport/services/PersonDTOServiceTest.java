@@ -9,20 +9,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class PeopleServiceTest {
+class PersonDTOServiceTest {
+    String url = "http://192.168.99.100:8080/api/people";
+    RestTemplate restTemplate = new RestTemplate();
 
     @Test
     void getPeopleConnection() {
         //given
-        String url = "http://192.168.99.100:8080/api/people";
+
         //when
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<PeopleDTO> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -37,10 +37,9 @@ class PeopleServiceTest {
     @Test
     void getPeopleCount() {
         //given
-        String url = "http://192.168.99.100:8080/api/people";
-        PeopleService peopleService = new PeopleService();
+        PersonDTOService personDTOService = new PersonDTOService();
         //when
-        RestTemplate restTemplate = new RestTemplate();
+
         ResponseEntity<PeopleDTO> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
@@ -48,6 +47,6 @@ class PeopleServiceTest {
                 new ParameterizedTypeReference<>() {
                 });
         //then
-        assertEquals(peopleService.getPeople().size(), Objects.requireNonNull(exchange.getBody()).getCount());
+        assertEquals(personDTOService.getPeople().size(), Objects.requireNonNull(exchange.getBody()).getCount());
     }
 }

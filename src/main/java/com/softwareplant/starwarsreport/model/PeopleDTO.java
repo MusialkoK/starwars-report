@@ -10,5 +10,5 @@ public class PeopleDTO {
     private int count;
     private String next;
     private String previous;
-    private List<Person> results;
+    private List<PersonDTO> results;
 }
