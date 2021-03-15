@@ -6,5 +6,5 @@ import lombok.Getter;
 public class DTO {
 
     @Getter
-    private String URL;
+    private String url;
 }
