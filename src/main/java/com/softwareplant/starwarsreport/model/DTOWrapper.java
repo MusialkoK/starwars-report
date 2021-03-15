@@ -5,10 +5,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PeopleDTO {
+public class DTOWrapper<T extends DTO> {
 
     private int count;
     private String next;
     private String previous;
-    private List<PersonDTO> results;
+    private List<T> results;
+
 }

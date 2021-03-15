@@ -1,6 +1,7 @@
 package com.softwareplant.starwarsreport.services;
 
-import com.softwareplant.starwarsreport.model.PeopleDTO;
+import com.softwareplant.starwarsreport.model.DTOWrapper;
+import com.softwareplant.starwarsreport.model.PlanetDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -13,9 +14,9 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+class PlanetApiServiceTest {
 
-class PersonDTOServiceTest {
-    String url = "http://192.168.99.100:8080/api/people";
+    String url = "http://192.168.99.100:8080/api/planets";
     RestTemplate restTemplate = new RestTemplate();
 
     @Test
@@ -23,7 +24,7 @@ class PersonDTOServiceTest {
         //given
 
         //when
-        ResponseEntity<PeopleDTO> exchange = restTemplate.exchange(
+        ResponseEntity<DTOWrapper<PlanetDTO>> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
@@ -37,16 +38,17 @@ class PersonDTOServiceTest {
     @Test
     void getPeopleCount() {
         //given
-        PersonDTOService personDTOService = new PersonDTOService();
+        PlanetApiService planetApiService = new PlanetApiService();
         //when
 
-        ResponseEntity<PeopleDTO> exchange = restTemplate.exchange(
+        ResponseEntity<DTOWrapper<PlanetDTO>> exchange = restTemplate.exchange(
                 url,
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 new ParameterizedTypeReference<>() {
                 });
         //then
-        assertEquals(personDTOService.getPeople().size(), Objects.requireNonNull(exchange.getBody()).getCount());
+        assertEquals(planetApiService.getPlanets().size(), Objects.requireNonNull(exchange.getBody()).getCount());
     }
 }
+
