@@ -23,6 +23,7 @@ public class FilmApiService {
                 new ParameterizedTypeReference<>() {
                 }
         );
+        response.getBody().setId(id);
         return response.getBody();
     }
 }
