@@ -9,11 +9,8 @@ import com.softwareplant.starwarsreport.services.PersonService;
 import com.softwareplant.starwarsreport.services.PlanetService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,13 +18,13 @@ import java.util.List;
 public class ReportFactory {
 
     private final PersonService personService;
-    private final PlanetService planetService;
+
 
     public Report create(Long id, ReportQuery query){
         List<ReportResult> resultList = new ArrayList<>();
-        Planet planet = planetService.getPlanetByName(query.getPlanetName());
 
-        List<Person> characterList = personService.filteredPeopleList(query.getCharacterPhrase(), planet.getUrl());
+
+        List<Person> characterList = personService.filteredPeopleList(query);
 
         characterList.forEach(p-> p.getFilmList().forEach(f->{
             ReportResult result = ReportResult.builder()
