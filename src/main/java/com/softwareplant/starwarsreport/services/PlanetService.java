@@ -54,7 +54,7 @@ public class PlanetService {
         return planetsDTO.stream().map(this::mapToPlanet).collect(Collectors.toList());
     }
 
-    public Planet getPlanetByName(String planetName) {
+    public Planet getPlanetByUrl(String url) {
         return new Planet();
     }
 }
