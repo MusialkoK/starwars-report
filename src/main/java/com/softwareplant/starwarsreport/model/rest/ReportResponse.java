@@ -3,6 +3,7 @@ package com.softwareplant.starwarsreport.model.rest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.softwareplant.starwarsreport.model.ReportResult;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class ReportResponse {
 
     @JsonProperty("report_id")
