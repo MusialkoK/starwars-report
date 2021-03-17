@@ -37,5 +37,4 @@ public class ReportResponseFactory {
                 .planetName(report.getPlanetName())
                 .resultList(results).build();
     }
-
 }

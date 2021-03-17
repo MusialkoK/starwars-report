@@ -70,9 +70,8 @@ public class PersonService {
     }
 
     private Person mapToPerson(PersonDTO personDTO) {
-        Long id = Utils.getIdFromUrl(personDTO.getUrl());
         return Person.builder()
-                .id(id)
+                .id(Utils.getIdFromUrl(personDTO.getUrl()))
                 .name(personDTO.getName())
                 .homeworld(planetService.getPlanetByUrl(personDTO.getHomeworldUrl()))
                 .filmList(personDTO.getFilmsUrl().stream()

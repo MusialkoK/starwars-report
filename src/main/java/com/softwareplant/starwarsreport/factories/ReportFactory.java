@@ -19,7 +19,6 @@ public class ReportFactory {
 
     private final PersonService personService;
 
-
     public Report create(Long id, ReportQuery query){
         List<ReportResult> resultList = new ArrayList<>();
 
@@ -37,7 +36,6 @@ public class ReportFactory {
                     .build();
             resultList.add(result);
         }));
-
 
         return Report.builder()
                 .id(id)

@@ -1,19 +1,17 @@
-package com.softwareplant.starwarsreport.model;
+package com.softwareplant.starwarsreport.model.rest;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Accessors(chain = true)
-@Builder
-public class Film {
+public class FilmDTO extends DTO{
 
-    private long id;
+    private Long id;
     private String name;
     private String url;
 }

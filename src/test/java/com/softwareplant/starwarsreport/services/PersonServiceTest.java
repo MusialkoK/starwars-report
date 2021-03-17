@@ -12,9 +12,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.*;
 
 
@@ -52,5 +54,13 @@ class PersonServiceTest {
 
         List<Person> result = mockedPersonService.filteredPeopleList(query);
         assertEquals(List.of(person),result);
+    }
+
+    @Test
+    void filteredPeopleListNoMocks() {
+
+        ReportQuery query = new ReportQuery("R","Tatooine");
+        List<Person> result = personService.filteredPeopleList(query);
+        assertNotEquals(result, Collections.emptyList());
     }
 }

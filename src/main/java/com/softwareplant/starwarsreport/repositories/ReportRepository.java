@@ -15,6 +15,4 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     void deleteAll();
     Optional<Report> findById(Long id);
     List<Report> findAll();
-
-
 }
