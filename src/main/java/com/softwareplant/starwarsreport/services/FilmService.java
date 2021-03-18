@@ -23,7 +23,7 @@ public class FilmService {
         return mapToFilm(filmDTO);
     }
 
-    public List<Film> getFilms(){
+    public List<Film> getFilms() {
         List<FilmDTO> filmDTOS = getFilmsDTO();
         return filmDTOS.stream().map(this::mapToFilm).collect(Collectors.toList());
     }
@@ -40,7 +40,7 @@ public class FilmService {
         return response.getBody();
     }
 
-    private List<FilmDTO> getFilmsDTO(){
+    private List<FilmDTO> getFilmsDTO() {
         String url = "http://192.168.99.100:8080/api/films/";
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<DTOWrapper<FilmDTO>> response = restTemplate.exchange(

@@ -12,14 +12,14 @@ import java.util.stream.Collectors;
 @Service
 public class ReportResponseFactory {
 
-    public ReportResponse create(Report report){
+    public ReportResponse create(Report report) {
         List<ReportResponseResult> results = report.getResultList().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
-        return mapToResponse(report,results);
+        return mapToResponse(report, results);
     }
 
-    private ReportResponseResult mapToResponse(ReportResult reportResult){
+    private ReportResponseResult mapToResponse(ReportResult reportResult) {
         return ReportResponseResult.builder()
                 .characterId(reportResult.getCharacterId())
                 .characterName(reportResult.getCharacterName())
@@ -30,7 +30,7 @@ public class ReportResponseFactory {
                 .build();
     }
 
-    private ReportResponse mapToResponse(Report report, List<ReportResponseResult> results){
+    private ReportResponse mapToResponse(Report report, List<ReportResponseResult> results) {
         return ReportResponse.builder()
                 .id(report.getId())
                 .characterPhrase(report.getCharacterPhrase())

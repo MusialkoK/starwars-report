@@ -1,23 +1,16 @@
 package com.softwareplant.starwarsreport.controllers;
 
-import com.softwareplant.starwarsreport.factories.ReportResponseFactory;
 import com.softwareplant.starwarsreport.factories.ReportFactory;
+import com.softwareplant.starwarsreport.factories.ReportResponseFactory;
 import com.softwareplant.starwarsreport.model.Report;
-import com.softwareplant.starwarsreport.model.rest.ReportResponse;
 import com.softwareplant.starwarsreport.model.rest.ReportQuery;
-import com.softwareplant.starwarsreport.repositories.ReportRepository;
+import com.softwareplant.starwarsreport.model.rest.ReportResponse;
 import com.softwareplant.starwarsreport.services.ReportService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -32,13 +25,8 @@ public class ReportController {
     @PutMapping("/{id}")
     public ResponseEntity<ReportResponse> putReport(@PathVariable Long id, @RequestBody ReportQuery query) {
         try {
-            Report report = reportFactory.create(id, query);
-            Report response = reportService.save(reportFactory.create(id, query));
-            if(response.getId().equals(report.getId())){
+            reportService.save(reportFactory.create(id, query));
                 return ResponseEntity.noContent().build();
-            }else{
-                return ResponseEntity.badRequest().build();
-            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

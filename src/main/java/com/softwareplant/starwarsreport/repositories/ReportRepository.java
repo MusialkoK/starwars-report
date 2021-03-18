@@ -11,7 +11,10 @@ import java.util.Optional;
 public interface ReportRepository extends JpaRepository<Report, Long> {
 
     void deleteById(Long id);
+
     void deleteAll();
+
     Optional<Report> findById(Long id);
+
     List<Report> findAll();
 }
