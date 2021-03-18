@@ -55,12 +55,4 @@ class PersonServiceTest {
         List<Person> result = mockedPersonService.filteredPeopleList(query);
         assertEquals(List.of(person),result);
     }
-
-    @Test
-    void filteredPeopleListNoMocks() {
-
-        ReportQuery query = new ReportQuery("R","Tatooine");
-        List<Person> result = personService.filteredPeopleList(query);
-        assertNotEquals(result, Collections.emptyList());
-    }
 }

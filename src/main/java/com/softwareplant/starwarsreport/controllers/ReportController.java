@@ -33,13 +33,12 @@ public class ReportController {
     public ResponseEntity<ReportResponse> putReport(@PathVariable Long id, @RequestBody ReportQuery query) {
         try {
             Report report = reportFactory.create(id, query);
-            Report response = reportService.save(report);
-            return ResponseEntity.ok(reportResponseFactory.create(report));
-//            if(response.equals(report)){
-//                return ResponseEntity.noContent().build();
-//            }else{
-//                return ResponseEntity.badRequest().build();
-//            }
+            Report response = reportService.save(reportFactory.create(id, query));
+            if(response.getId().equals(report.getId())){
+                return ResponseEntity.noContent().build();
+            }else{
+                return ResponseEntity.badRequest().build();
+            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

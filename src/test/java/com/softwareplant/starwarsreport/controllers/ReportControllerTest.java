@@ -22,6 +22,9 @@ class ReportControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ReportController reportController;
+
     @Test
     void putCorrectReport() throws Exception {
         //given
@@ -40,14 +43,36 @@ class ReportControllerTest {
     }
 
     @Test
-    void deleteSingleReport() throws Exception {
+    void successfullyDeleteSingleReport() throws Exception {
         //given
         Long inputId = 1L;
+        String phrase = "ann";
+        String planet = "Tatooine";
+        ReportQuery query = new ReportQuery(phrase, planet);
+        reportController.putReport(inputId,query);
+
 
         //when+then
         mockMvc.perform(MockMvcRequestBuilders
                 .delete("/reports/{id}", inputId))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void unsuccessfullyDeleteSingleReport() throws Exception {
+        //given
+        Long inputId = 1L;
+        Long deleteId = 2L;
+        String phrase = "ann";
+        String planet = "Tatooine";
+        ReportQuery query = new ReportQuery(phrase, planet);
+        reportController.putReport(inputId,query);
+
+
+        //when+then
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/reports/{id}", deleteId))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
     @Test

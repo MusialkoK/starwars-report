@@ -16,7 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @AllArgsConstructor
 class ReportResponseFactoryTest {
+
     private final ReportResponseFactory reportResponseFactory;
+
     @Test
     void isCreated() {
         //given

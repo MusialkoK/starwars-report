@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -22,6 +23,6 @@ public class Report {
     private Long id;
     private String characterPhrase;
     private String planetName;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ReportResult> resultList;
 }
