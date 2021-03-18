@@ -34,11 +34,12 @@ public class ReportController {
         try {
             Report report = reportFactory.create(id, query);
             Report response = reportService.save(report);
-            if(response.equals(report)){
-                return ResponseEntity.noContent().build();
-            }else{
-                return ResponseEntity.badRequest().build();
-            }
+            return ResponseEntity.ok(reportResponseFactory.create(report));
+//            if(response.equals(report)){
+//                return ResponseEntity.noContent().build();
+//            }else{
+//                return ResponseEntity.badRequest().build();
+//            }
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

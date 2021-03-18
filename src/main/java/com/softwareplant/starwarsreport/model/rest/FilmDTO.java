@@ -11,6 +11,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class FilmDTO extends DTO{
 
-    private String name;
+    private String title;
     private String url;
 }

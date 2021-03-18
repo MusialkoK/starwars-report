@@ -1,10 +1,8 @@
 package com.softwareplant.starwarsreport.services;
 
 import com.softwareplant.starwarsreport.model.Film;
-import com.softwareplant.starwarsreport.model.Person;
 import com.softwareplant.starwarsreport.model.rest.DTOWrapper;
 import com.softwareplant.starwarsreport.model.rest.FilmDTO;
-import com.softwareplant.starwarsreport.model.rest.PersonDTO;
 import com.softwareplant.starwarsreport.utils.Utils;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -58,7 +56,7 @@ public class FilmService {
     private Film mapToFilm(FilmDTO filmDTO) {
         return Film.builder()
                 .id(Utils.getIdFromUrl(filmDTO.getUrl()))
-                .name(filmDTO.getName())
+                .name(filmDTO.getTitle())
                 .url(filmDTO.getUrl())
                 .build();
     }
