@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
+@Builder
 public class Planet {
 
     private long id;
