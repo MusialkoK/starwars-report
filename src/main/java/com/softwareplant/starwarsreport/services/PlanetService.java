@@ -14,11 +14,11 @@ import org.springframework.web.client.RestTemplate;
 public class PlanetService {
 
     public Planet getPlanetByUrl(String url) {
-        PlanetDTO planetDTO = getFilmDTOByUrl(url);
+        PlanetDTO planetDTO = getPlanetDTOByUrl(url);
         return mapToPlanet(planetDTO);
     }
 
-    private PlanetDTO getFilmDTOByUrl(String url) {
+    public PlanetDTO getPlanetDTOByUrl(String url) {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<PlanetDTO> response = restTemplate.exchange(
                 url,
