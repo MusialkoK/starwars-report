@@ -2,24 +2,24 @@ package com.softwareplant.starwarsreport.factories;
 
 import com.softwareplant.starwarsreport.model.Report;
 import com.softwareplant.starwarsreport.model.ReportResult;
+import com.softwareplant.starwarsreport.model.rest.ReportQuery;
 import com.softwareplant.starwarsreport.model.rest.ReportResponse;
 import com.softwareplant.starwarsreport.model.rest.ReportResponseResult;
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@AllArgsConstructor
 class ReportResponseFactoryTest {
-
+    private final ReportResponseFactory reportResponseFactory;
     @Test
     void isCreated() {
         //given
-
-        ReportResponseFactory reportResponseFactory = new ReportResponseFactory();
-
         long filmId = 1L;
         String filmName = "A new Hope";
         String planetName = "Naboo";
@@ -63,8 +63,7 @@ class ReportResponseFactoryTest {
 
         ReportResponse actual = reportResponseFactory.create(report);
 
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
         assertEquals(expected.getResultList(), actual.getResultList());
-
     }
 }
