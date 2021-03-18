@@ -4,6 +4,7 @@ import com.softwareplant.starwarsreport.model.Film;
 import com.softwareplant.starwarsreport.model.rest.DTOWrapper;
 import com.softwareplant.starwarsreport.model.rest.FilmDTO;
 import com.softwareplant.starwarsreport.utils.Utils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -17,6 +18,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class FilmService {
+
+    @Value("${api.url}")
+    private String baseUrl;
 
     public Film getFilmByUrl(String url) {
         FilmDTO filmDTO = getFilmDTOByUrl(url);
@@ -41,10 +45,10 @@ public class FilmService {
     }
 
     private List<FilmDTO> getFilmsDTO() {
-        String url = "http://192.168.99.100:8080/api/films/";
+        String filmsUrl = "films/";
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<DTOWrapper<FilmDTO>> response = restTemplate.exchange(
-                url,
+                baseUrl + filmsUrl,
                 HttpMethod.GET,
                 HttpEntity.EMPTY,
                 new ParameterizedTypeReference<>() {

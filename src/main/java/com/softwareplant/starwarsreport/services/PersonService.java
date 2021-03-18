@@ -5,7 +5,8 @@ import com.softwareplant.starwarsreport.model.rest.DTOWrapper;
 import com.softwareplant.starwarsreport.model.rest.PersonDTO;
 import com.softwareplant.starwarsreport.model.rest.ReportQuery;
 import com.softwareplant.starwarsreport.utils.Utils;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -21,13 +22,16 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PersonService {
 
     private final PlanetService planetService;
     private final FilmService filmService;
 
-    private final String URL = "http://192.168.99.100:8080/api/people";
+    @Value("${api.url}")
+    private String baseUrl;
+
+    private final String peopleUrl = "/people";
 
     public List<Person> filteredPeopleList(ReportQuery query) {
         List<PersonDTO> peopleDTO = getPeopleDTO().stream()
@@ -43,7 +47,7 @@ public class PersonService {
 
     public List<PersonDTO> getPeopleDTO() {
         RestTemplate restTemplate = new RestTemplate();
-        String currentURL = URL;
+        String currentURL = baseUrl + peopleUrl;
         List<PersonDTO> result = new ArrayList<>();
         do {
             ResponseEntity<DTOWrapper<PersonDTO>> response = restTemplate.exchange(
