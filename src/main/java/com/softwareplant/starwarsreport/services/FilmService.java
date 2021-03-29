@@ -3,7 +3,9 @@ package com.softwareplant.starwarsreport.services;
 import com.softwareplant.starwarsreport.model.Film;
 import com.softwareplant.starwarsreport.model.rest.DTOWrapper;
 import com.softwareplant.starwarsreport.model.rest.FilmDTO;
+import com.softwareplant.starwarsreport.services.rest.FilmDTOService;
 import com.softwareplant.starwarsreport.utils.Utils;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -17,44 +19,19 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class FilmService {
 
-    @Value("${api.url}")
-    private String baseUrl;
+    private final FilmDTOService filmDTOService;
 
     public Film getFilmByUrl(String url) {
-        FilmDTO filmDTO = getFilmDTOByUrl(url);
+        FilmDTO filmDTO = filmDTOService.getFilmDTOByUrl(url);
         return mapToFilm(filmDTO);
     }
 
     public List<Film> getFilms() {
-        List<FilmDTO> filmDTOS = getFilmsDTO();
+        List<FilmDTO> filmDTOS = filmDTOService.getFilmsDTO();
         return filmDTOS.stream().map(this::mapToFilm).collect(Collectors.toList());
-    }
-
-    public FilmDTO getFilmDTOByUrl(String url) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<FilmDTO> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                new ParameterizedTypeReference<>() {
-                }
-        );
-        return response.getBody();
-    }
-
-    private List<FilmDTO> getFilmsDTO() {
-        String filmsUrl = "films/";
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<DTOWrapper<FilmDTO>> response = restTemplate.exchange(
-                baseUrl + filmsUrl,
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                new ParameterizedTypeReference<>() {
-                }
-        );
-        return Objects.requireNonNull(response.getBody()).getResults();
     }
 
     private Film mapToFilm(FilmDTO filmDTO) {
